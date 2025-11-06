@@ -5,16 +5,9 @@ import ListaCategorias from './components/categoria/listacategorias/ListaCategor
 import Home from './pages/home/Home';
 import FormCategoria from './components/categoria/formcategoria/FormCategoria';
 import CategoriaPagina from './pages/categoria/Categoriapagina';
+import SobreNos from './pages/sobrenos/SobreNos';
 
 // Páginas simples para teste
-const SobreNos = () => (
-  <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-    <div className="text-center">
-      <h1 className="text-3xl font-bold text-[#02735E] mb-4">Sobre Nós</h1>
-      <p className="text-gray-600">Página em construção</p>
-    </div>
-  </div>
-);
 
 const Apolice = () => (
   <div className="min-h-screen bg-gray-50 flex items-center justify-center">
