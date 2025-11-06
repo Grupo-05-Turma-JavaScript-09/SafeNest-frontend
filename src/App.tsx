@@ -3,6 +3,7 @@ import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
 import ListaCategorias from './components/categoria/listacategorias/ListaCategorias';
 import Home from './pages/home/Home';
+import FormCategoria from './components/categoria/formcategoria/FormCategoria';
 
 // Páginas simples para teste
 const SobreNos = () => (
@@ -41,9 +42,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/sobre-nos" element={<SobreNos />} />
-            <Route path="/categoria" element={<ListaCategorias />} />
+            <Route path="/categorias" element={<ListaCategorias />} />
             <Route path="/apolice" element={<Apolice />} />
             <Route path="/cadastro" element={<Cadastro />} />
+            <Route path="/cadastrarcategoria" element={<FormCategoria />} />
           </Routes>
         </main>
         <Footer />
