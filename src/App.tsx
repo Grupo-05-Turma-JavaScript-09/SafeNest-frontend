@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import Footer from  './components/footer/Footer';
+import ListaCategorias from './components/categoria/listacategorias/ListaCategorias';
 
 // Páginas simples para teste
 const Home = () => (
@@ -48,15 +49,6 @@ const SobreNos = () => (
   </div>
 );
 
-const Categoria = () => (
-  <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-    <div className="text-center">
-      <h1 className="text-3xl font-bold text-[#02735E] mb-4">Categoria</h1>
-      <p className="text-gray-600">Página em construção</p>
-    </div>
-  </div>
-);
-
 const Apolice = () => (
   <div className="min-h-screen bg-gray-50 flex items-center justify-center">
     <div className="text-center">
@@ -84,7 +76,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/sobre-nos" element={<SobreNos />} />
-            <Route path="/categoria" element={<Categoria />} />
+            <Route path="/categoria" element={<ListaCategorias />} />
             <Route path="/apolice" element={<Apolice />} />
             <Route path="/cadastro" element={<Cadastro />} />
           </Routes>
