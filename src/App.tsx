@@ -9,6 +9,7 @@ import DeletarCategoria from './components/categoria/deletarcategoria/DeletarCat
 import SobreNos from './pages/sobrenos/SobreNos';
 import ApolicePagina from './pages/apolice/Apolicepagina';
 import Apolice from './pages/apolice/Apolicepagina';
+import EditarCategoria from './components/categoria/editarcategoria/EditarCategoria';
 
 
 // Páginas simples para teste
@@ -44,6 +45,8 @@ function App() {
             <Route path="/categorias" element={<ListaCategorias />} />
             <Route path="/cadastrarcategoria" element={<FormCategoria />} />
             <Route path="/deletarcategoria/:id" element={<DeletarCategoria />} />
+            <Route path="/editarcategoria/:id" element={<EditarCategoria />} />
+            
             
             <Route path="/apolice" element={<Apolice />} />
             <Route path="/cadastro" element={<Cadastro />} />
