@@ -84,13 +84,11 @@ const ApolicePagina = () => {
             <div className="bg-white/10 rounded-xl p-4 text-center">
               <div className="text-2xl mb-2">🚗</div>
               <div className="text-white font-semibold">Dirija com Deus</div>
-              <div className="text-white/60 text-sm">0 apólices</div>
             </div>
 
             <div className="bg-white/10 rounded-xl p-4 text-center">
               <div className="text-2xl mb-2">👨‍👩‍👧‍👦</div>
-              <div className="text-white font-semibold">Vida</div>
-              <div className="text-white/60 text-sm">0 apólices</div>
+              <div className="text-white font-semibold">Vida</div>  
             </div>
           </div>
         </div>
