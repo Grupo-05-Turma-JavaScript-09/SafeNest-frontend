@@ -30,7 +30,7 @@ function CardCategoria({categoria}: CardCategoriaProps) {
                 </Link>
 
                 <Link 
-                    to={`/deletarcategoria/${categoria.descricao}`}
+                    to={`/deletarcategoria/${categoria.id}`}
                     className='w-full text-white bg-[#014034] hover:bg-red-600 flex items-center justify-center py-3 transition-all duration-300 hover:scale-105'
                 >
                     <button className="font-semibold flex items-center gap-2">

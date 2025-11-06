@@ -5,10 +5,10 @@ import ListaCategorias from './components/categoria/listacategorias/ListaCategor
 import Home from './pages/home/Home';
 import FormCategoria from './components/categoria/formcategoria/FormCategoria';
 import CategoriaPagina from './pages/categoria/Categoriapagina';
+import DeletarCategoria from './components/categoria/deletarcategoria/DeletarCategoria';
 import SobreNos from './pages/sobrenos/SobreNos';
 
 // Páginas simples para teste
-
 const Apolice = () => (
   <div className="min-h-screen bg-gray-50 flex items-center justify-center">
     <div className="text-center">
@@ -45,6 +45,7 @@ function App() {
             {/* Rotas antigas (mantidas) */}
             <Route path="/categorias" element={<ListaCategorias />} />
             <Route path="/cadastrarcategoria" element={<FormCategoria />} />
+            <Route path="/deletarcategoria/:id" element={<DeletarCategoria />} />
             
             <Route path="/apolice" element={<Apolice />} />
             <Route path="/cadastro" element={<Cadastro />} />
