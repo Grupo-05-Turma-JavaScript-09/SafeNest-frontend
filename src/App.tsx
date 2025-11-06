@@ -7,6 +7,7 @@ import DeletarCategoria from "./components/categoria/deletarcategoria/DeletarCat
 import ListaApolice from "./components/apolice/listaapolice/ListaApolice"
 import FormApolice from "./components/apolice/formapolice/FormApolice"
 import DeletarApolice from "./components/apolice/deletarapolice/DeletarApolice"
+import Footer from "./components/footer/Footer"
 
 function App() {
   
@@ -28,6 +29,7 @@ function App() {
             <Route path="/deletarapolice/:id" element={<DeletarApolice />} />
           </Routes>
         </div>
+        <Footer/>
       </BrowserRouter>
     </>
   )
