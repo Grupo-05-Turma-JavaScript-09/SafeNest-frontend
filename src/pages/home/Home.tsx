@@ -1,4 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleVerApolices = () => {
+    navigate("/apolice");
+  };
+
   return (
     <div className="min-h-screen bg-[#36BFB1]">
       {/* Hero Section */}
@@ -6,7 +14,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
             
-            {/* Text  */}
+            {/* Text Content */}
             <div className="flex-1 text-white">
               <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 Protegendo seu 
@@ -18,7 +26,7 @@ const Home = () => {
                 <span className="block text-[#014034] font-semibold">Ou pelo menos tentando...</span>
               </p>
 
-              {/* Stats Humor */}
+              {/* Stats with Humor */}
               <div className="grid grid-cols-2 gap-6 mb-8">
                 <div className="bg-[#02735E] backdrop-blur-sm rounded-2xl p-4 text-center">
                   <div className="text-2xl font-bold">📈</div>
@@ -34,7 +42,10 @@ const Home = () => {
 
               {/* CTA Button */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-white text-[#02735E] px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-transform shadow-2xl">
+                <button 
+                  onClick={handleVerApolices}
+                  className="bg-white text-[#02735E] px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-transform shadow-2xl"
+                >
                   🚀 Ver Minhas Apólices
                 </button>
               </div>
