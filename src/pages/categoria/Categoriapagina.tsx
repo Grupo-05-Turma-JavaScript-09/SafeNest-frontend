@@ -62,29 +62,6 @@ const CategoriaPagina = () => {
 
         </div>
 
-        {/* Estatísticas Rápidas */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center border border-white/20">
-          <h3 className="text-2xl font-bold text-white mb-6">
-            📊 Visão Geral do Sistema
-          </h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white/20 rounded-xl p-4">
-              <div className="text-3xl font-bold text-white mb-2">0</div>
-              <div className="text-white/80 text-sm">Categorias Ativas</div>
-            </div>
-            
-            <div className="bg-white/20 rounded-xl p-4">
-              <div className="text-3xl font-bold text-white mb-2">0</div>
-              <div className="text-white/80 text-sm">Cadastradas Hoje</div>
-            </div>
-            
-            <div className="bg-white/20 rounded-xl p-4">
-              <div className="text-3xl font-bold text-white mb-2">100%</div>
-              <div className="text-white/80 text-sm">Sistema Operacional</div>
-            </div>
-          </div>
-        </div>
 
         {/* Mensagem de Humor */}
         <div className="mt-8 text-center">
