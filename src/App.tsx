@@ -15,6 +15,7 @@ import DeletarApolice from './components/apolice/deletarapolice/DeletarApolice';
 import EditarApolice from './components/apolice/editarapolice/EditarApolice';
 import FormApolice from './components/apolice/formapolice/FormApolice';
 import ListaApolices from './components/apolice/listaapolice/ListaApolice';
+import { ToastContainer } from 'react-toastify';
 
 
 
@@ -24,6 +25,7 @@ import ListaApolices from './components/apolice/listaapolice/ListaApolice';
 function App() {
   return (
     <Router>
+      <ToastContainer />
       <div className="min-h-screen flex flex-col">
         <Navbar />
         <main className="flex-grow">
