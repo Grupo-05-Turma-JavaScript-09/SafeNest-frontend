@@ -46,7 +46,7 @@ function FormCategoria() {
     try {
       if (id !== undefined) {
         await atualizar("/categorias", categoria, setCategoria);
-        ToastAlerta("O Tema foi atualizado com sucesso!", "sucesso");
+        ToastAlerta("A categoria foi atualizado com sucesso!", "sucesso");
       } else {
         await cadastrar("/categorias", categoria, setCategoria);
         ToastAlerta("Categoria cadastrada com sucesso!","sucesso");
