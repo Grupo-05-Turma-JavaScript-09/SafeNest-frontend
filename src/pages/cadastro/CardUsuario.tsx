@@ -1,4 +1,4 @@
-import type Usuario from "../../../models/Usuario";
+import type Usuario from "../../models/Usuario";
 
 interface CardUsuarioProps {
   usuario: Usuario;

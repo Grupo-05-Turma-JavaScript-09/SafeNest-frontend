@@ -15,7 +15,8 @@ function ListarUsuarios() {
   async function buscarUsuarios() {
     try {
       setIsLoading(true);
-      await buscar("/usuarios", setUsuarios, {});
+      await buscar("/usuarios", setUsuarios);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.toString().includes("401")) {
         alert("Erro servidor");
