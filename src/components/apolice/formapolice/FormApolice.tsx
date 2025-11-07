@@ -11,8 +11,8 @@ function FormApolice() {
   const [apolice, setApolice] = useState<Apolice>({
     id: 0,
     numero_apolice: "",
-    valor_premio: 0,
-    cobertura: 0,
+    valor_premio: undefined as unknown as number,
+    cobertura: undefined as unknown as number,
     data: new Date().toISOString(),
     categoria: undefined,
   } as Apolice);
