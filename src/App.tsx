@@ -1,34 +1,33 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import Navbar from './components/navbar/Navbar';
-import Footer from './components/footer/Footer';
-import ListaCategorias from './components/categoria/listacategorias/ListaCategorias';
-import FormCategoria from './components/categoria/formcategoria/FormCategoria';
-import EditarCategoria from './components/categoria/editarcategoria/EditarCategoria';
-import DeletarCategoria from './components/categoria/deletarcategoria/DeletarCategoria';
-import ListaApolices from './components/apolice/listaapolice/ListaApolice';
-import FormApolice from './components/apolice/formapolice/FormApolice';
-import EditarApolice from './components/apolice/editarapolice/EditarApolice';
 import DeletarApolice from './components/apolice/deletarapolice/DeletarApolice';
+import EditarApolice from './components/apolice/editarapolice/EditarApolice';
+import FormApolice from './components/apolice/formapolice/FormApolice';
+import ListaApolices from './components/apolice/listaapolice/ListaApolice';
+import DeletarCategoria from './components/categoria/deletarcategoria/DeletarCategoria';
+import EditarCategoria from './components/categoria/editarcategoria/EditarCategoria';
+import FormCategoria from './components/categoria/formcategoria/FormCategoria';
+import ListaCategorias from './components/categoria/listacategorias/ListaCategorias';
+import Footer from './components/footer/Footer';
+import Navbar from './components/navbar/Navbar';
+import { default as Apolice, default as ApolicePagina } from './pages/apolice/Apolicepagina';
+import Cadastro from './pages/cadastro/Cadastro';
+import CadastroPagina from './pages/cadastro/Cadastropagina';
+import ListarUsuarios from './pages/cadastro/ListarUsuarios';
+import CategoriaPagina from './pages/categoria/Categoriapagina';
 import Home from './pages/home/Home';
 import SobreNos from './pages/sobrenos/SobreNos';
-import CategoriaPagina from './pages/categoria/Categoriapagina';
-import CadastroPagina from './pages/cadastro/Cadastropagina';
-import Cadastro from './pages/cadastro/Cadastro';
-import ListarUsuarios from './pages/cadastro/ListarUsuarios';
-import { default as ApolicePagina } from './pages/apolice/Apolicepagina';
-import { default as Apolice } from './pages/apolice/Apolicepagina';
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <ToastContainer />
       <div className="min-h-screen flex flex-col">
         <Navbar />
         
         <main className="flex-grow">
           <Routes>
-            {/* 🏠 home e sobre noss */}
+            {/* 🏠 home e sobre nós */}
             <Route path="/" element={<Home />} />
             <Route path="/sobre-nos" element={<SobreNos />} />
 
@@ -60,7 +59,7 @@ function App() {
         
         <Footer />
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
