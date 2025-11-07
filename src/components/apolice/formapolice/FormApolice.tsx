@@ -17,76 +17,58 @@ function FormApolice() {
     cobertura: undefined,
     data: new Date().toISOString(),
     categoria: undefined,
+    usuario: undefined,
   } as Apolice);
 
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [usuarios, setUsuarios] = useState<Usuario[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Buscar categorias e usuários ao carregar
+  // Carrega categorias e usuários
   useEffect(() => {
     buscar("/categorias", setCategorias);
     buscar("/usuarios", setUsuarios);
   }, []);
 
-  // Atualiza campos simples
+  // Atualiza inputs da apólice
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
     const { name, value, type } = e.target;
     setApolice((prev) => ({
       ...prev,
-      [name]: type === "number" ? (value === "" ? undefined : Number(value)) : value,
+      [name]:
+        type === "number" ? (value === "" ? undefined : Number(value)) : value,
     }));
   }
 
-  // Atualização do select de categoria
+  // Seleciona categoria
   function selecionarCategoria(e: ChangeEvent<HTMLSelectElement>) {
     const idCat = e.target.value;
-
-    if (!idCat) {
-      setApolice((prev) => ({
-        ...prev,
-        categoria: undefined,
-      }));
-      return;
-    }
-
     const cat = categorias.find((c) => String(c.id) === idCat);
-
-    if (cat) {
-      setApolice((prev) => ({
-        ...prev,
-        categoria: cat,
-      }));
-    }
+    setApolice((prev) => ({ ...prev, categoria: cat }));
   }
 
-  // Atualização do select de usuário
+  // Seleciona usuário
   function selecionarUsuario(e: ChangeEvent<HTMLSelectElement>) {
     const idUser = e.target.value;
+    const user = usuarios.find((u) => String(u.id) === idUser);
+    setApolice((prev) => ({ ...prev, usuario: user }));
+  }
 
-    if (!idUser) {
-      setApolice((prev) => ({
-        ...prev,
-        usuario: undefined,
-      }));
+  // Envia formulário com validação
+  async function enviarFormulario(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    if (!apolice.usuario) {
+      ToastAlerta("Selecione um usuário válido.", "erro");
       return;
     }
 
-    const user = usuarios.find((u) => String(u.id) === idUser);
-
-    if (user) {
-      setApolice((prev) => ({
-        ...prev,
-        usuario: user,
-      }));
+    if (apolice.usuario.idade < 18) {
+      ToastAlerta("Não elegível para este tipo de seguro.", "erro");
+      return;
     }
-  }
 
-  // Enviar formulário
-  async function enviarFormulario(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
     setIsLoading(true);
-
     try {
       await cadastrar("/apolices", apolice, () => {});
       ToastAlerta("Apólice cadastrada com sucesso!", "sucesso");
@@ -94,7 +76,8 @@ function FormApolice() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error("Erro ao cadastrar apólice:", err);
-      const mensagemErro = err.response?.data?.message || err.message || "Erro desconhecido";
+      const mensagemErro =
+        err.response?.data?.message || err.message || "Erro desconhecido";
       ToastAlerta(`Erro ao cadastrar apólice: ${mensagemErro}`, "erro");
     } finally {
       setIsLoading(false);
@@ -154,10 +137,9 @@ function FormApolice() {
           className="border-2 border-gray-300 p-3 rounded-lg"
         >
           <option value="">Selecione o usuário...</option>
-
           {usuarios.map((user) => (
             <option key={user.id} value={String(user.id)}>
-              {user.nome} ({user.usuario})
+              {user.nome} ({user.usuario}) - {user.idade} anos
             </option>
           ))}
         </select>
@@ -170,7 +152,6 @@ function FormApolice() {
           className="border-2 border-gray-300 p-3 rounded-lg"
         >
           <option value="">Selecione a categoria...</option>
-
           {categorias.map((cat) => (
             <option key={cat.id} value={String(cat.id)}>
               {cat.nome}
