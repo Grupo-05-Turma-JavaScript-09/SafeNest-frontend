@@ -36,7 +36,7 @@ function ListarUsuarios() {
         
         {isLoading && (
           <div className="flex justify-center w-full my-8">
-            <SyncLoader color="#ffffff" size={32} />
+            <SyncLoader color="#36BFB1" size={32} />
           </div>
         )}
 

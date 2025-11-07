@@ -161,7 +161,7 @@ function FormApolice() {
 
         <button
           type="submit"
-          className="bg-indigo-500 hover:bg-indigo-700 text-white py-2 rounded-lg flex justify-center"
+          className="w-full py-4 bg-linear-to-r from-[#36BFB1] to-[#02735E] text-white rounded-xl font-bold text-lg hover:shadow-lg transition-all duration-200 mt-4 flex items-center justify-center gap-2 hover:from-[#2ba89a] hover:to-[#02624f] disabled:opacity-50"
         >
           {isLoading ? (
             <ClipLoader color="#ffffff" size={24} />

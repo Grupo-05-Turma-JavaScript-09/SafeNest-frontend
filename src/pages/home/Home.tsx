@@ -6,7 +6,7 @@ const Home = () => {
   const handleVerApolices = () => {
     navigate("/apolice");
   };
-
+ 
   return (
     <div className="min-h-screen bg-[#36BFB1]">
       {/* Hero Section */}
