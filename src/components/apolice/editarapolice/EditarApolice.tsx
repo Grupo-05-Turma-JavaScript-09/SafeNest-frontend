@@ -33,10 +33,15 @@ function EditarApolice() {
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
     const { name, value, type } = e.target;
 
-    setApolice((prev) => ({
-      ...prev,
-      [name]: type === "number" ? Number(value) : value,
-    }));
+   setApolice((prev) => ({
+    ...prev,
+    [name]:
+      type === "number"
+        ? value === ""
+          ? "" // ← mantém o campo vazio se apagado
+          : Number(value)
+        : value,
+  }));
   }
 
   // Atualização exclusiva do select de categoria
@@ -112,7 +117,7 @@ function EditarApolice() {
           type="number"
           name="valor_premio"
           placeholder="Valor do Prêmio"
-          value={apolice.valor_premio ?? ""}
+         value={apolice.valor_premio || apolice.valor_premio === 0 ? apolice.valor_premio : ""}
           onChange={atualizarEstado}
           className="border-2 border-gray-300 p-3 rounded-lg"
         />
