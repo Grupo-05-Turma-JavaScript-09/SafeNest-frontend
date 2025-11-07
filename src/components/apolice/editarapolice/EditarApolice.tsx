@@ -5,10 +5,9 @@ import type Apolice from "../../../models/Apolice";
 import type Categoria from "../../../models/Categoria";
 import { atualizar, buscar } from "../../../services/Service";
 
-function formatarDataInput(timestamp?: number) {
-  if (!timestamp) return "";
-  // retorna "YYYY-MM-DD"
-  return new Date(timestamp).toISOString().slice(0, 10);
+function formatarDataInput(dateStr?: string) {
+  if (!dateStr) return "";
+  return new Date(dateStr).toISOString().slice(0, 10);
 }
 
 function EditarApolice() {
@@ -19,40 +18,77 @@ function EditarApolice() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Buscar apólice + categorias
   useEffect(() => {
     if (id) {
       buscar(`/apolices/${id}`, setApolice);
     }
-    // buscar categorias
+
     buscar("/categorias", setCategorias);
   }, [id]);
 
-  function atualizarEstado(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-    const { name, value, type } = e.target as HTMLInputElement;
-    setApolice({
-      ...apolice,
-      [name]: type === "number" ? parseFloat(value) || 0 : value,
-    } as Apolice);
+  // REMOVIDO O useEffect QUE ESTAVA CAUSANDO CONFLITO
+
+  // Atualização de inputs comuns
+  function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+    const { name, value, type } = e.target;
+
+    setApolice((prev) => ({
+      ...prev,
+      [name]: type === "number" ? Number(value) : value,
+    }));
   }
 
+  // Atualização exclusiva do select de categoria
   function selecionarCategoria(e: ChangeEvent<HTMLSelectElement>) {
-    const idCat = Number(e.target.value);
-    const cat = categorias.find((c) => c.id === idCat) || null;
-    setApolice({ ...apolice, categoria: cat ?? undefined } as Apolice);
+    const idCat = e.target.value;
+    
+    if (!idCat) {
+      setApolice((prev) => ({
+        ...prev,
+        categoria: undefined,
+      }));
+      return;
+    }
+
+    const cat = categorias.find((c) => String(c.id) === idCat);
+
+    if (cat) {
+      setApolice((prev) => ({
+        ...prev,
+        categoria: cat,
+      }));
+    }
   }
 
+  // Enviar PUT
   async function enviarFormulario(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!id) return;
+    if (!id) {
+      alert("ID da apólice não encontrado!");
+      return;
+    }
+
+    console.log('=== ENVIANDO ATUALIZAÇÃO ===');
+    console.log('Dados completos:', JSON.stringify(apolice, null, 2));
+
     setIsLoading(true);
+
     try {
-      // enviar PUT para /apolices/{id}
-      await atualizar(`/apolices/${id}`, apolice, () => {});
+      // Tentar com /apolices (sem ID) passando o ID no body
+      await atualizar(`/apolices`, apolice, () => {});
       alert("Apólice atualizada com sucesso!");
       navigate("/apolices");
-    } catch (err) {
-      console.error("Erro ao atualizar apólice:", err);
-      alert("Erro ao atualizar apólice.");
+    } catch (err: any) {
+      console.error("=== ERRO AO ATUALIZAR ===");
+      console.error("Erro completo:", err);
+      console.error("URL tentada:", err.config?.url);
+      console.error("Método:", err.config?.method);
+      console.error("Resposta do servidor:", err.response?.data);
+      console.error("Status:", err.response?.status);
+      
+      const mensagemErro = err.response?.data?.message || err.message || "Erro desconhecido";
+      alert(`Erro ao atualizar apólice: ${mensagemErro}`);
     } finally {
       setIsLoading(false);
     }
@@ -95,21 +131,25 @@ function EditarApolice() {
           name="data"
           value={formatarDataInput(apolice.data)}
           onChange={(e) =>
-            setApolice({ ...apolice, data: new Date(e.target.value).getTime() })
+            setApolice((prev) => ({
+              ...prev,
+              data: new Date(e.target.value).toISOString(),
+            }))
           }
           className="border-2 border-gray-300 p-3 rounded-lg"
         />
 
-        {/* Select de categoria */}
+        {/* SELECT DE CATEGORIA */}
         <select
           name="categoria"
-          value={apolice.categoria?.id ?? ""}
+          value={String(apolice.categoria?.id ?? "")}
           onChange={selecionarCategoria}
           className="border-2 border-gray-300 p-3 rounded-lg"
         >
           <option value="">Selecione a categoria...</option>
+
           {categorias.map((cat) => (
-            <option key={cat.id} value={cat.id}>
+            <option key={cat.id} value={String(cat.id)}>
               {cat.nome}
             </option>
           ))}
@@ -119,7 +159,11 @@ function EditarApolice() {
           type="submit"
           className="bg-indigo-500 hover:bg-indigo-700 text-white py-2 rounded-lg flex justify-center"
         >
-          {isLoading ? <ClipLoader color="#ffffff" size={24} /> : "Salvar Alterações"}
+          {isLoading ? (
+            <ClipLoader color="#ffffff" size={24} />
+          ) : (
+            "Salvar Alterações"
+          )}
         </button>
       </form>
     </div>

@@ -17,13 +17,13 @@ function DeletarApolice() {
   }, [id]);
 
   async function buscarPorId(idParam: string) {
-    try {
-      await buscar(`/apolices/${idParam}`, (data: any) => setApolice(data));
-    } catch (err) {
-      console.error("Erro ao buscar apólice:", err);
-      alert("Erro ao carregar apólice.");
-    }
+  try {
+    await buscar(`/apolices/${idParam}`, (data: any) => setApolice(data));
+  } catch (err) {
+    console.error("Erro ao buscar apólice:", err);
+    alert("Erro ao carregar apólice.");
   }
+}
 
   async function deletarApolice() {
     if (!id) return;

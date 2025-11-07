@@ -1,8 +1,9 @@
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import type Apolice from "../../../models/Apolice";
-import { cadastrar } from "../../../services/Service";
+import type Categoria from "../../../models/Categoria";
+import { cadastrar, buscar } from "../../../services/Service";
 
 function FormApolice() {
   const navigate = useNavigate();
@@ -12,21 +13,47 @@ function FormApolice() {
     numero_apolice: "",
     valor_premio: 0,
     cobertura: 0,
-    data: new Date().getTime(),
-    categoria: null,
-  });
+    data: new Date().toISOString(),
+    categoria: undefined,
+  } as Apolice);
 
-  const [usuarioId, setUsuarioId] = useState<number>(0);
-  const [categoriaId, setCategoriaId] = useState<number>(0);
+  const [categorias, setCategorias] = useState<Categoria[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Buscar categorias ao carregar
+  useEffect(() => {
+    buscar("/categorias", setCategorias);
+  }, []);
 
   // Atualiza campos simples
   function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
     const { name, value, type } = e.target;
-    setApolice({
-      ...apolice,
-      [name]: type === "number" ? parseFloat(value) || 0 : value,
-    } as Apolice);
+    setApolice((prev) => ({
+      ...prev,
+      [name]: type === "number" ? Number(value) : value,
+    }));
+  }
+
+  // Atualização do select de categoria
+  function selecionarCategoria(e: ChangeEvent<HTMLSelectElement>) {
+    const idCat = e.target.value;
+
+    if (!idCat) {
+      setApolice((prev) => ({
+        ...prev,
+        categoria: undefined,
+      }));
+      return;
+    }
+
+    const cat = categorias.find((c) => String(c.id) === idCat);
+
+    if (cat) {
+      setApolice((prev) => ({
+        ...prev,
+        categoria: cat,
+      }));
+    }
   }
 
   // Enviar formulário
@@ -35,19 +62,13 @@ function FormApolice() {
     setIsLoading(true);
 
     try {
-      // Monta o objeto completo para envio
-      const novaApolice = {
-        ...apolice,
-        usuario: usuarioId ? { id: usuarioId } : null,
-        categoria: categoriaId ? { id: categoriaId } : null,
-      };
-
-      await cadastrar("/apolices", novaApolice, () => {});
+      await cadastrar("/apolices", apolice, () => {});
       alert("Apólice cadastrada com sucesso!");
       navigate("/apolices");
-    } catch (err) {
+    } catch (err: any) {
       console.error("Erro ao cadastrar apólice:", err);
-      alert("Erro ao cadastrar apólice.");
+      const mensagemErro = err.response?.data?.message || err.message || "Erro desconhecido";
+      alert(`Erro ao cadastrar apólice: ${mensagemErro}`);
     } finally {
       setIsLoading(false);
     }
@@ -62,7 +83,7 @@ function FormApolice() {
           type="text"
           name="numero_apolice"
           placeholder="Número da Apólice"
-          value={apolice.numero_apolice}
+          value={apolice.numero_apolice || ""}
           onChange={atualizarEstado}
           className="border-2 border-gray-300 p-3 rounded-lg"
         />
@@ -71,7 +92,7 @@ function FormApolice() {
           type="number"
           name="valor_premio"
           placeholder="Valor do Prêmio"
-          value={apolice.valor_premio || ""}
+          value={apolice.valor_premio ?? ""}
           onChange={atualizarEstado}
           className="border-2 border-gray-300 p-3 rounded-lg"
         />
@@ -80,7 +101,7 @@ function FormApolice() {
           type="number"
           name="cobertura"
           placeholder="Cobertura"
-          value={apolice.cobertura || ""}
+          value={apolice.cobertura ?? ""}
           onChange={atualizarEstado}
           className="border-2 border-gray-300 p-3 rounded-lg"
         />
@@ -90,33 +111,29 @@ function FormApolice() {
           name="data"
           value={new Date(apolice.data).toISOString().slice(0, 10)}
           onChange={(e) =>
-            setApolice({
-              ...apolice,
-              data: new Date(e.target.value).getTime(),
-            })
+            setApolice((prev) => ({
+              ...prev,
+              data: new Date(e.target.value).toISOString(),
+            }))
           }
           className="border-2 border-gray-300 p-3 rounded-lg"
         />
 
-        {/* Campo de ID do Usuário */}
-        <input
-          type="number"
-          name="usuarioId"
-          placeholder="ID do Usuário"
-          value={usuarioId || ""}
-          onChange={(e) => setUsuarioId(parseInt(e.target.value) || 0)}
+        {/* SELECT DE CATEGORIA */}
+        <select
+          name="categoria"
+          value={String(apolice.categoria?.id ?? "")}
+          onChange={selecionarCategoria}
           className="border-2 border-gray-300 p-3 rounded-lg"
-        />
+        >
+          <option value="">Selecione a categoria...</option>
 
-        {/* Campo de ID da Categoria */}
-        <input
-          type="number"
-          name="categoriaId"
-          placeholder="ID da Categoria"
-          value={categoriaId || ""}
-          onChange={(e) => setCategoriaId(parseInt(e.target.value) || 0)}
-          className="border-2 border-gray-300 p-3 rounded-lg"
-        />
+          {categorias.map((cat) => (
+            <option key={cat.id} value={String(cat.id)}>
+              {cat.nome}
+            </option>
+          ))}
+        </select>
 
         <button
           type="submit"
