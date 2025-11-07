@@ -11,6 +11,8 @@ import SobreNos from './pages/sobrenos/SobreNos';
 import ApolicePagina from './pages/apolice/Apolicepagina';
 import Apolice from './pages/apolice/Apolicepagina';
 import EditarCategoria from './components/categoria/editarcategoria/EditarCategoria';
+import CadastroPagina from './pages/cadastro/Cadastropagina';
+
 
 
 // Páginas simples para teste
@@ -30,7 +32,8 @@ function App() {
             <Route path="/categoria" element={<CategoriaPagina />} /> 
             <Route path="/categoria/listar" element={<ListaCategorias />} />
             <Route path="/categoria/cadastrar" element={<FormCategoria />} />
-            <Route path="/cadastro" element={<Cadastro />} />
+            {/* <Route path="/cadastro" element={<Cadastro />} /> */}
+
 
             {/* Apólice */}
             <Route path="/apolice" element={<ApolicePagina />} />
@@ -43,6 +46,9 @@ function App() {
             
             
             <Route path="/apolice" element={<Apolice />} />
+
+
+            <Route path="/cadastro" element={<CadastroPagina />} />
             
           </Routes>
         </main>
