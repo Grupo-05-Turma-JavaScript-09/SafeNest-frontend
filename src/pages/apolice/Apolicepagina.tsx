@@ -41,7 +41,7 @@ const ApolicePagina = () => {
 
           {/* Card Listar Apólices */}
           <Link 
-            to="/apolice/listar" 
+            to="/apolices/listar" 
             className="group"
           >
             <div className="bg-white rounded-2xl shadow-2xl p-8 border-l-4 border-[#02735E] hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
