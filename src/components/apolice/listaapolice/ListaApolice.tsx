@@ -34,7 +34,7 @@ function ListaApolices() {
     <>
       {isLoading && (
         <div className="flex justify-center w-full my-8">
-          <SyncLoader color="#02735E" size={32} />
+          <SyncLoader color="#ffffff" size={32} />
         </div>
       )}
 
