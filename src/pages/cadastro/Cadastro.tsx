@@ -5,7 +5,7 @@ import { ClipLoader } from "react-spinners";
 import type Usuario from "../../models/Usuario";
 import { ToastAlerta } from "../../utils/ToastAlerta";
 
-function FormUsuario() {
+function Cadastro() {
   const navigate = useNavigate();
 
   // Estado inicial do usuário
@@ -58,7 +58,7 @@ function FormUsuario() {
     }
 
     try {
-      await cadastrar("/usuarios/cadastrar", usuario, setUsuario);
+      await cadastrar("/usuarios/", usuario, setUsuario);
       ToastAlerta("Usuário cadastrado com sucesso!", "sucesso")
       retornar();
     } catch (error) {
@@ -116,7 +116,7 @@ function FormUsuario() {
                 name="usuario"
                 value={usuario.usuario}
                 onChange={atualizarEstado}
-                placeholder="Ex: maria.souza"
+                placeholder="Ex: maria@gmail.com"
                 className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl 
                 focus:outline-none focus:ring-2 focus:ring-[#36BFB1] focus:border-transparent transition-all duration-200"
                 required
@@ -217,4 +217,4 @@ function FormUsuario() {
   );
 }
 
-export default FormUsuario;
+export default Cadastro;

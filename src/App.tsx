@@ -32,7 +32,8 @@ function App() {
             <Route path="/categoria" element={<CategoriaPagina />} /> 
             <Route path="/categoria/listar" element={<ListaCategorias />} />
             <Route path="/categoria/cadastrar" element={<FormCategoria />} />
-            {/* <Route path="/cadastro" element={<Cadastro />} /> */}
+            <Route path="/cadastro" element={<CadastroPagina />} />
+            <Route path="/cadastro/usuario" element={<Cadastro />} />
 
 
             {/* Apólice */}
