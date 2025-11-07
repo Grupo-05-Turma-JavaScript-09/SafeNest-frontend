@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { cadastrar } from "../../services/Service";
@@ -69,7 +70,7 @@ function Cadastro() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#36BFB1] to-[#02735E] py-12 px-4 flex items-center justify-center">
+    <div className="min-h-screen bg-linear-to-br from-[#36BFB1] to-[#02735E] py-12 px-4 flex items-center justify-center">
       <div className="container flex flex-col items-center justify-center mx-auto max-w-2xl">
         
         {/* Header */}
@@ -189,7 +190,7 @@ function Cadastro() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-4 bg-gradient-to-r from-[#36BFB1] to-[#02735E] text-white rounded-xl font-bold text-lg 
+                className="w-full py-4 bg-linear-to-r from-[#36BFB1] to-[#02735E] text-white rounded-xl font-bold text-lg 
                 hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 
                 hover:from-[#2ba89a] hover:to-[#02624f] disabled:opacity-50"
               >

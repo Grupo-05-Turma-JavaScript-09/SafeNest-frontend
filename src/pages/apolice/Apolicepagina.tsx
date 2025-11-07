@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const ApolicePagina = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#36BFB1] to-[#02735E] py-12">
+    <div className="min-h-screen bg-linear-to-b from-[#36BFB1] to-[#02735E] py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -20,7 +20,7 @@ const ApolicePagina = () => {
           
           {/* Card Nova Apólice */}
           <Link 
-            to="/apolice/cadastrar" 
+            to="/apolices/cadastrar" 
             className="group"
           >
             <div className="bg-white rounded-2xl shadow-2xl p-8 border-l-4 border-[#36BFB1] hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">

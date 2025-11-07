@@ -8,11 +8,11 @@ interface CardCategoriaProps{
 function CardCategoria({categoria}: CardCategoriaProps) {
     return (
         <div className='flex flex-col rounded-2xl overflow-hidden justify-between shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1'>
-            <header className='py-4 px-6 bg-gradient-to-r from-[#02735E] to-[#038C73] text-white font-bold text-xl text-center'>
+            <header className='py-4 px-6 bg-linear-to-r from-[#02735E] to-[#038C73] text-white font-bold text-xl text-center'>
                 {categoria.nome}
             </header>
             
-            <div className='p-6 bg-gradient-to-b from-gray-50 to-white h-full flex items-center justify-center'>
+            <div className='p-6 bg-linear-to-b from-gray-50 to-white h-full flex items-center justify-center'>
                 <p className='text-gray-700 text-lg text-center font-medium'>
                     {categoria.descricao}
                 </p>

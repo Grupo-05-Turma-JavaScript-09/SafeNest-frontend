@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
@@ -58,7 +59,7 @@ function FormCategoria() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#36BFB1] to-[#02735E] py-12 px-4">
+    <div className="min-h-screen bg-linear-to-br from-[#36BFB1] to-[#02735E] py-12 px-4">
       <div className="container flex flex-col items-center justify-center mx-auto max-w-2xl">
         
         {/* Header */}
@@ -115,7 +116,7 @@ function FormCategoria() {
 
             {/* Submit Button */}
             <button
-              className="w-full py-4 bg-gradient-to-r from-[#36BFB1] to-[#02735E] text-white rounded-xl font-bold text-lg hover:shadow-lg transition-all duration-200 mt-4 flex items-center justify-center gap-2 hover:from-[#2ba89a] hover:to-[#02624f] disabled:opacity-50"
+              className="w-full py-4 bg-linear-to-r from-[#36BFB1] to-[#02735E] text-white rounded-xl font-bold text-lg hover:shadow-lg transition-all duration-200 mt-4 flex items-center justify-center gap-2 hover:from-[#2ba89a] hover:to-[#02624f] disabled:opacity-50"
               type="submit"
               disabled={isLoading}
             >
