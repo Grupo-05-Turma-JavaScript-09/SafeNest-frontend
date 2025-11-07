@@ -4,6 +4,7 @@ import { SyncLoader } from "react-spinners";
 import type Apolice from "../../../models/Apolice";
 import { buscar } from "../../../services/Service";
 import CardApolice from "../cardapolice/CardApolice";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function ListaApolices() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -20,9 +21,9 @@ function ListaApolices() {
     } catch (error: any) {
       console.error("Erro ao buscar apólices:", error);
       if (error.toString().includes("401")) {
-        alert("Erro de autenticação. Faça login novamente.");
+        ToastAlerta("Erro de autenticação. Faça login novamente.", "erro");
       } else {
-        alert("Erro ao carregar apólices.");
+        ToastAlerta("Erro ao carregar apólices.", "erro");
       }
     } finally {
       setIsLoading(false);

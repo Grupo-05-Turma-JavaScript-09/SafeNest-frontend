@@ -4,6 +4,7 @@ import { ClipLoader } from "react-spinners";
 import type Categoria from "../../../models/Categoria";
 import { buscar, atualizar } from "../../../services/Service";
 import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function EditarCategoria() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function EditarCategoria() {
       await buscar(`/categorias/${id}`, setCategoria);
     } catch (error) {
       console.error("Erro ao buscar categoria:", error);
-      alert("Erro ao buscar categoria.");
+      ToastAlerta("Erro ao buscar categoria.", "erro");
     }
   }
 
@@ -40,10 +41,10 @@ function EditarCategoria() {
 
   try {
     await atualizar(`/categorias/${id}`, categoria, setCategoria );
-    alert("Categoria atualizada com sucesso!");
+    ToastAlerta("Categoria atualizada com sucesso!", "sucesso");
   } catch (error) {
     console.error("Erro ao atualizar categoria:", error);
-    alert("Erro ao atualizar categoria.");
+    ToastAlerta("Erro ao atualizar categoria.", "erro");
   }
 
   setIsLoading(false);

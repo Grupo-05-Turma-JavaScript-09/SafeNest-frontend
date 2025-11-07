@@ -5,6 +5,7 @@ import type Apolice from "../../../models/Apolice";
 import type Categoria from "../../../models/Categoria";
 import type Usuario from "../../../models/Usuario";
 import { cadastrar, buscar } from "../../../services/Service";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function FormApolice() {
   const navigate = useNavigate();
@@ -88,12 +89,13 @@ function FormApolice() {
 
     try {
       await cadastrar("/apolices", apolice, () => {});
-      alert("Apólice cadastrada com sucesso!");
+      ToastAlerta("Apólice cadastrada com sucesso!", "sucesso");
       navigate("/apolices");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error("Erro ao cadastrar apólice:", err);
       const mensagemErro = err.response?.data?.message || err.message || "Erro desconhecido";
-      alert(`Erro ao cadastrar apólice: ${mensagemErro}`);
+      ToastAlerta(`Erro ao cadastrar apólice: ${mensagemErro}`, "erro");
     } finally {
       setIsLoading(false);
     }

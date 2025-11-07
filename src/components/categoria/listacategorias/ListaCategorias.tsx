@@ -3,6 +3,7 @@ import type Categoria from "../../../models/Categoria";
 import { buscar } from "../../../services/Service";
 import CardCategoria from "../cardcategoria/CardCategoria";
 import { SyncLoader } from "react-spinners";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function ListaCategorias() {
 
@@ -23,7 +24,7 @@ function ListaCategorias() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.toString().includes("401")) {
-        alert("Erro servidor");
+        ToastAlerta("Erro servidor", "erro");
       }
     } finally {
       setIsLoading(false);

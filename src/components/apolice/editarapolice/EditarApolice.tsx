@@ -4,6 +4,7 @@ import { ClipLoader } from "react-spinners";
 import type Apolice from "../../../models/Apolice";
 import type Categoria from "../../../models/Categoria";
 import { atualizar, buscar } from "../../../services/Service";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function formatarDataInput(dateStr?: string) {
   if (!dateStr) return "";
@@ -70,7 +71,7 @@ function EditarApolice() {
   async function enviarFormulario(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!id) {
-      alert("ID da apólice não encontrado!");
+      ToastAlerta("ID da apólice não encontrado!", "erro");
       return;
     }
 
@@ -82,8 +83,9 @@ function EditarApolice() {
     try {
       // Tentar com /apolices (sem ID) passando o ID no body
       await atualizar(`/apolices`, apolice, () => {});
-      alert("Apólice atualizada com sucesso!");
+      ToastAlerta("Apólice atualizada com sucesso!", "sucesso");
       navigate("/apolices");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.error("=== ERRO AO ATUALIZAR ===");
       console.error("Erro completo:", err);
@@ -93,7 +95,7 @@ function EditarApolice() {
       console.error("Status:", err.response?.status);
       
       const mensagemErro = err.response?.data?.message || err.message || "Erro desconhecido";
-      alert(`Erro ao atualizar apólice: ${mensagemErro}`);
+      ToastAlerta(`Erro ao atualizar apólice: ${mensagemErro}`, "erro");
     } finally {
       setIsLoading(false);
     }

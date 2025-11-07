@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import type Categoria from "../../../models/Categoria";
 import { buscar, deletar } from "../../../services/Service";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 
 function DeletarCategoria() {
@@ -17,7 +18,7 @@ function DeletarCategoria() {
       await buscar(`/categorias/${id}`, setCategoria);
     } catch (error) {
       console.error("Erro ao buscar categoria:", error);
-      alert("Erro ao buscar categoria.");
+      ToastAlerta("Erro ao buscar categoria.", "erro");
     }
   }
 
@@ -32,10 +33,10 @@ function DeletarCategoria() {
 
     try {
       await deletar(`/categorias/${id}`);
-      alert("Categoria excluída com sucesso");
+      ToastAlerta("Categoria excluída com sucesso", "sucesso");
     } catch (error) {
       console.error("Erro ao deletar categoria:", error);
-      alert("Erro ao deletar categoria.");
+      ToastAlerta("Erro ao deletar categoria.", "erro");
     }
 
     setIsLoading(false);

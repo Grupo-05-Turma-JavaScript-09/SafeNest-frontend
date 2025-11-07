@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import type Apolice from "../../../models/Apolice";
 import { buscar, deletar } from "../../../services/Service";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function DeletarApolice() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function DeletarApolice() {
     await buscar(`/apolices/${idParam}`, (data: any) => setApolice(data));
   } catch (err) {
     console.error("Erro ao buscar apólice:", err);
-    alert("Erro ao carregar apólice.");
+    ToastAlerta("Erro ao carregar apólice.", "erro");
   }
 }
 
@@ -30,11 +31,11 @@ function DeletarApolice() {
     setIsLoading(true);
     try {
       await deletar(`/apolices/${id}`);
-      alert("Apólice excluída com sucesso!");
+      ToastAlerta("Apólice excluída com sucesso!", "sucesso");
       navigate("/apolices");
     } catch (err) {
       console.error("Erro ao deletar apólice:", err);
-      alert("Erro ao deletar apólice.");
+      ToastAlerta("Erro ao deletar apólice.", "erro");
     } finally {
       setIsLoading(false);
     }

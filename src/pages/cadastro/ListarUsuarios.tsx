@@ -3,6 +3,7 @@ import type Usuario from "../../models/Usuario";
 import { buscar } from "../../services/Service";
 import CardUsuario from   "./CardUsuario";
 import { SyncLoader } from "react-spinners";
+import { ToastAlerta } from "../../utils/ToastAlerta";
 
 function ListarUsuarios() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,7 +20,7 @@ function ListarUsuarios() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.toString().includes("401")) {
-        alert("Erro servidor");
+        ToastAlerta("Erro servidor", "erro");
       }
     } finally {
       setIsLoading(false);
