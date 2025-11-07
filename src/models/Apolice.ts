@@ -2,7 +2,7 @@ import type Categoria from "./Categoria";
 import type Usuario from "./Usuario";
 
 
-export interface Apolice {
+export default interface Apolice {
   id: number;
   numero_apolice: string;
   valor_premio: number

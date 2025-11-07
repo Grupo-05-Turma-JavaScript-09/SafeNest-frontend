@@ -1,17 +1,20 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/navbar/Navbar';
-import Footer from './components/footer/Footer';
-import ListaCategorias from './components/categoria/listacategorias/ListaCategorias';
-import Home from './pages/home/Home';
-import FormCategoria from './components/categoria/formcategoria/FormCategoria';
-import CategoriaPagina from './pages/categoria/Categoriapagina';
-import Cadastro from './pages/cadastro/Cadastro';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import DeletarCategoria from './components/categoria/deletarcategoria/DeletarCategoria';
-import SobreNos from './pages/sobrenos/SobreNos';
-import ApolicePagina from './pages/apolice/Apolicepagina';
-import Apolice from './pages/apolice/Apolicepagina';
 import EditarCategoria from './components/categoria/editarcategoria/EditarCategoria';
+import FormCategoria from './components/categoria/formcategoria/FormCategoria';
+import ListaCategorias from './components/categoria/listacategorias/ListaCategorias';
+import Footer from './components/footer/Footer';
+import Navbar from './components/navbar/Navbar';
+import { default as Apolice, default as ApolicePagina } from './pages/apolice/Apolicepagina';
+import Cadastro from './pages/cadastro/Cadastro';
 import CadastroPagina from './pages/cadastro/Cadastropagina';
+import CategoriaPagina from './pages/categoria/Categoriapagina';
+import Home from './pages/home/Home';
+import SobreNos from './pages/sobrenos/SobreNos';
+import DeletarApolice from './components/apolice/deletarapolice/DeletarApolice';
+import EditarApolice from './components/apolice/editarapolice/EditarApolice';
+import FormApolice from './components/apolice/formapolice/FormApolice';
+import ListaApolices from './components/apolice/listaapolice/ListaApolice';
 
 
 
@@ -37,7 +40,13 @@ function App() {
 
 
             {/* Apólice */}
-            <Route path="/apolice" element={<ApolicePagina />} />
+            <Route path="/apolices" element={<ApolicePagina />} />    {/*pagina*/}
+            <Route path="/apolice" element={<Apolice />} />           {/*componente*/}
+            <Route path="/apolices/listar" element={<ListaApolices />} />
+            <Route path="/apolices/cadastrar" element={<FormApolice />} />
+            <Route path="/apolices/editar/:id" element={<EditarApolice />} />
+            <Route path="/apolices/deletar/:id" element={<DeletarApolice />} />
+
             
             {/* Rotas antigas (mantidas) */}
             <Route path="/categorias" element={<ListaCategorias />} />
