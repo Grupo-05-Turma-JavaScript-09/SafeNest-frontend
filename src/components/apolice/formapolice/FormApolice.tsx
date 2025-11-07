@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import type Apolice from "../../../models/Apolice";
 import type Categoria from "../../../models/Categoria";
+import type Usuario from "../../../models/Usuario";
 import { cadastrar, buscar } from "../../../services/Service";
 
 function FormApolice() {
@@ -11,18 +12,20 @@ function FormApolice() {
   const [apolice, setApolice] = useState<Apolice>({
     id: 0,
     numero_apolice: "",
-    valor_premio: undefined as unknown as number,
-    cobertura: undefined as unknown as number,
+    valor_premio: undefined,
+    cobertura: undefined,
     data: new Date().toISOString(),
     categoria: undefined,
   } as Apolice);
 
   const [categorias, setCategorias] = useState<Categoria[]>([]);
+  const [usuarios, setUsuarios] = useState<Usuario[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Buscar categorias ao carregar
+  // Buscar categorias e usuários ao carregar
   useEffect(() => {
     buscar("/categorias", setCategorias);
+    buscar("/usuarios", setUsuarios);
   }, []);
 
   // Atualiza campos simples
@@ -30,7 +33,7 @@ function FormApolice() {
     const { name, value, type } = e.target;
     setApolice((prev) => ({
       ...prev,
-      [name]: type === "number" ? Number(value) : value,
+      [name]: type === "number" ? (value === "" ? undefined : Number(value)) : value,
     }));
   }
 
@@ -52,6 +55,28 @@ function FormApolice() {
       setApolice((prev) => ({
         ...prev,
         categoria: cat,
+      }));
+    }
+  }
+
+  // Atualização do select de usuário
+  function selecionarUsuario(e: ChangeEvent<HTMLSelectElement>) {
+    const idUser = e.target.value;
+
+    if (!idUser) {
+      setApolice((prev) => ({
+        ...prev,
+        usuario: undefined,
+      }));
+      return;
+    }
+
+    const user = usuarios.find((u) => String(u.id) === idUser);
+
+    if (user) {
+      setApolice((prev) => ({
+        ...prev,
+        usuario: user,
       }));
     }
   }
@@ -118,6 +143,22 @@ function FormApolice() {
           }
           className="border-2 border-gray-300 p-3 rounded-lg"
         />
+
+        {/* SELECT DE USUÁRIO */}
+        <select
+          name="usuario"
+          value={String(apolice.usuario?.id ?? "")}
+          onChange={selecionarUsuario}
+          className="border-2 border-gray-300 p-3 rounded-lg"
+        >
+          <option value="">Selecione o usuário...</option>
+
+          {usuarios.map((user) => (
+            <option key={user.id} value={String(user.id)}>
+              {user.nome} ({user.usuario})
+            </option>
+          ))}
+        </select>
 
         {/* SELECT DE CATEGORIA */}
         <select
