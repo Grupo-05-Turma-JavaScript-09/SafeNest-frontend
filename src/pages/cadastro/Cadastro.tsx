@@ -44,7 +44,7 @@ function Cadastro() {
   }
 
   function retornar() {
-    navigate("/");
+    navigate("/apolice");
   }
 
   async function cadastrarNovoUsuario(e: FormEvent<HTMLFormElement>) {
@@ -60,8 +60,10 @@ function Cadastro() {
     try {
       await cadastrar("/usuarios/", usuario, setUsuario);
       ToastAlerta("Usuário cadastrado com sucesso!", "sucesso")
+      alert("Usuário cadastrado com sucesso!")
       retornar();
     } catch (error) {
+      alert("Erro ao cadastrar usuário!")
       ToastAlerta("Erro ao cadastrar usuário!", "erro")
     }
 
