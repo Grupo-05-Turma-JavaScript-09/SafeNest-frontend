@@ -18,8 +18,9 @@ function ListaCategorias() {
     try {
       setIsLoading(true);
 
-      await buscar("/categorias", setCategorias, {});
+      await buscar("/categorias", setCategorias);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.toString().includes("401")) {
         alert("Erro servidor");

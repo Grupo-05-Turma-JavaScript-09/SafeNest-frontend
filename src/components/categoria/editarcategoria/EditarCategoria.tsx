@@ -14,7 +14,7 @@ function EditarCategoria() {
 
   async function buscarPorId(id: string) {
     try {
-      await buscar(`/categorias/${id}`, setCategoria, {});
+      await buscar(`/categorias/${id}`, setCategoria);
     } catch (error) {
       console.error("Erro ao buscar categoria:", error);
       alert("Erro ao buscar categoria.");

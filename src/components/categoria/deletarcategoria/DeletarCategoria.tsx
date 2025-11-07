@@ -14,7 +14,7 @@ function DeletarCategoria() {
 
   async function buscarPorId(id: string) {
     try {
-      await buscar(`/categorias/${id}`, setCategoria, {});
+      await buscar(`/categorias/${id}`, setCategoria);
     } catch (error) {
       console.error("Erro ao buscar categoria:", error);
       alert("Erro ao buscar categoria.");
@@ -31,7 +31,7 @@ function DeletarCategoria() {
     setIsLoading(true);
 
     try {
-      await deletar(`/categorias/${id}`, {});
+      await deletar(`/categorias/${id}`);
       alert("Categoria excluída com sucesso");
     } catch (error) {
       console.error("Erro ao deletar categoria:", error);

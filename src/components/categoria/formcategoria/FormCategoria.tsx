@@ -15,7 +15,7 @@ function FormCategoria() {
 
   async function buscarCategoriaPorId(id: string) {
     try {
-      await buscar(`/categorias/${id}`, setCategoria, {});
+      await buscar(`/categorias/${id}`, setCategoria);
     } catch (error) {
       alert("Erro ao buscar o Categoria.");
     }
@@ -44,10 +44,10 @@ function FormCategoria() {
 
     try {
       if (id !== undefined) {
-        await atualizar("/categorias", categoria, setCategoria, {});
+        await atualizar("/categorias", categoria, setCategoria);
         alert("O Tema foi atualizado com sucesso!");
       } else {
-        await cadastrar("/categorias", categoria, setCategoria, {});
+        await cadastrar("/categorias", categoria, setCategoria);
         alert("Categoria cadastrada com sucesso!");
       }
     } catch (error) {
