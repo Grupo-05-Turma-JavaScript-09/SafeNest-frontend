@@ -1,23 +1,15 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-
-// Components
 import Navbar from './components/navbar/Navbar';
 import Footer from './components/footer/Footer';
-
-// Categoria Components
 import ListaCategorias from './components/categoria/listacategorias/ListaCategorias';
 import FormCategoria from './components/categoria/formcategoria/FormCategoria';
 import EditarCategoria from './components/categoria/editarcategoria/EditarCategoria';
 import DeletarCategoria from './components/categoria/deletarcategoria/DeletarCategoria';
-
-// Apólice Components
 import ListaApolices from './components/apolice/listaapolice/ListaApolice';
 import FormApolice from './components/apolice/formapolice/FormApolice';
 import EditarApolice from './components/apolice/editarapolice/EditarApolice';
 import DeletarApolice from './components/apolice/deletarapolice/DeletarApolice';
-
-// Pages
 import Home from './pages/home/Home';
 import SobreNos from './pages/sobrenos/SobreNos';
 import CategoriaPagina from './pages/categoria/Categoriapagina';
