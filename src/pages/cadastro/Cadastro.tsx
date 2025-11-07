@@ -45,7 +45,7 @@ function Cadastro() {
   }
 
   function retornar() {
-    navigate("/apolice");
+    navigate("/cadastro");
   }
 
   async function cadastrarNovoUsuario(e: FormEvent<HTMLFormElement>) {
